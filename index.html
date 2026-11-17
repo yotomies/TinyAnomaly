@@ -698,7 +698,7 @@ function viewGame(g){
     <div class="shots">${g.screenshots
       ? g.screenshots.map((s,i)=>`<figure class="shot-fig">
           <button class="shot-btn" type="button" data-zoom="${i}" aria-label="Enlarge: ${s.caption}"><img src="${s.src}" alt="${s.alt}" loading="lazy" width="1600" height="900"></button>
-          <figcaption>${s.caption}</figcaption></figure>`).join("")
+          </figure>`).join("")
       : [1,2,3].map(()=>`<figure class="shot">Screenshot coming soon</figure>`).join("")}</div>
   </section>
 
@@ -795,7 +795,7 @@ document.addEventListener("click", e=>{
 /* Screenshot lightbox */
 const lightbox = document.createElement("dialog");
 lightbox.className = "lightbox";
-lightbox.innerHTML = `<img alt=""><p></p>`;
+lightbox.innerHTML = `<img alt="">`;
 document.body.appendChild(lightbox);
 lightbox.addEventListener("click", ()=> lightbox.close());
 document.addEventListener("click", e=>{
@@ -803,7 +803,6 @@ document.addEventListener("click", e=>{
   const g = GAMES.find(x=>x.slug===decodeURIComponent(location.hash.slice(1)));
   const s = g && g.screenshots && g.screenshots[+z.dataset.zoom]; if(!s) return;
   lightbox.querySelector("img").src = s.src; lightbox.querySelector("img").alt = s.alt;
-  lightbox.querySelector("p").textContent = s.caption;
   lightbox.showModal();
 });
 
